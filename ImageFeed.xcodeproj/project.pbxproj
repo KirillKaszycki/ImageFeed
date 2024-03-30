@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E35E3CDE2BB8579A00C9FA5E /* InagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35E3CDD2BB8579A00C9FA5E /* InagesListCell.swift */; };
 		E3ACFC3E2BB5265000FCC311 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */; };
 		E3ACFC402BB5265000FCC311 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */; };
-		E3ACFC422BB5265000FCC311 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC412BB5265000FCC311 /* ViewController.swift */; };
+		E3ACFC422BB5265000FCC311 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC412BB5265000FCC311 /* ImagesListViewController.swift */; };
 		E3ACFC452BB5265000FCC311 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3ACFC432BB5265000FCC311 /* Main.storyboard */; };
 		E3ACFC472BB5265200FCC311 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3ACFC462BB5265200FCC311 /* Assets.xcassets */; };
 		E3ACFC4A2BB5265200FCC311 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3ACFC482BB5265200FCC311 /* LaunchScreen.storyboard */; };
@@ -36,10 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E35E3CDD2BB8579A00C9FA5E /* InagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InagesListCell.swift; sourceTree = "<group>"; };
 		E3ACFC3A2BB5265000FCC311 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E3ACFC412BB5265000FCC311 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E3ACFC412BB5265000FCC311 /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
 		E3ACFC442BB5265000FCC311 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3ACFC462BB5265200FCC311 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3ACFC492BB5265200FCC311 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E35E3CDF2BB857A000C9FA5E /* ImagesList */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACFC412BB5265000FCC311 /* ImagesListViewController.swift */,
+				E35E3CDD2BB8579A00C9FA5E /* InagesListCell.swift */,
+			);
+			path = ImagesList;
+			sourceTree = "<group>";
+		};
 		E3ACFC312BB5265000FCC311 = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +112,7 @@
 			children = (
 				E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */,
 				E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */,
-				E3ACFC412BB5265000FCC311 /* ViewController.swift */,
+				E35E3CDF2BB857A000C9FA5E /* ImagesList */,
 				E3ACFC432BB5265000FCC311 /* Main.storyboard */,
 				E3ACFC462BB5265200FCC311 /* Assets.xcassets */,
 				E3ACFC482BB5265200FCC311 /* LaunchScreen.storyboard */,
@@ -258,8 +269,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3ACFC422BB5265000FCC311 /* ViewController.swift in Sources */,
+				E3ACFC422BB5265000FCC311 /* ImagesListViewController.swift in Sources */,
 				E3ACFC3E2BB5265000FCC311 /* AppDelegate.swift in Sources */,
+				E35E3CDE2BB8579A00C9FA5E /* InagesListCell.swift in Sources */,
 				E3ACFC402BB5265000FCC311 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,4 +5,10 @@
 //  Created by Кирилл Кашицкий on 30.03.2024.
 //
 
-import Foundation
+import UIKit
+
+final class ImagesListCell: UITableViewCell {
+    static let reuseIdentifier = "ImagesListCell"
+    
+    
+}
