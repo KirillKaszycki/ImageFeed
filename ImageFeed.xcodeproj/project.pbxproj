@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E35E3CDE2BB8579A00C9FA5E /* InagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35E3CDD2BB8579A00C9FA5E /* InagesListCell.swift */; };
+		E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */; };
 		E3ACFC3E2BB5265000FCC311 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */; };
 		E3ACFC402BB5265000FCC311 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */; };
 		E3ACFC422BB5265000FCC311 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC412BB5265000FCC311 /* ImagesListViewController.swift */; };
@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E35E3CDD2BB8579A00C9FA5E /* InagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InagesListCell.swift; sourceTree = "<group>"; };
+		E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		E3ACFC3A2BB5265000FCC311 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				E3ACFC412BB5265000FCC311 /* ImagesListViewController.swift */,
-				E35E3CDD2BB8579A00C9FA5E /* InagesListCell.swift */,
+				E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 			files = (
 				E3ACFC422BB5265000FCC311 /* ImagesListViewController.swift in Sources */,
 				E3ACFC3E2BB5265000FCC311 /* AppDelegate.swift in Sources */,
-				E35E3CDE2BB8579A00C9FA5E /* InagesListCell.swift in Sources */,
+				E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */,
 				E3ACFC402BB5265000FCC311 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
