@@ -87,9 +87,16 @@
 			children = (
 				E3ACFC412BB5265000FCC311 /* ImagesListViewController.swift */,
 				E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */,
-				E3197AD62BC8057A007ECCB5 /* SingleImageViewController.swift */,
 			);
 			path = ImagesList;
+			sourceTree = "<group>";
+		};
+		E3601C3B2BC9430600D54BF6 /* SingleImage */ = {
+			isa = PBXGroup;
+			children = (
+				E3197AD62BC8057A007ECCB5 /* SingleImageViewController.swift */,
+			);
+			path = SingleImage;
 			sourceTree = "<group>";
 		};
 		E3ACFC312BB5265000FCC311 = {
@@ -117,6 +124,7 @@
 			children = (
 				E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */,
 				E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */,
+				E3601C3B2BC9430600D54BF6 /* SingleImage */,
 				E3DF2CE02BC7CA5D0078952A /* Profile */,
 				E35E3CDF2BB857A000C9FA5E /* ImagesList */,
 				E3ACFC432BB5265000FCC311 /* Main.storyboard */,
