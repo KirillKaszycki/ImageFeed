@@ -26,8 +26,8 @@ final class ProfileViewController: UIViewController {
         exitButtonConfigure()
     }
     
+    // Profile Image
     private func profileImageConfigure() {
-        // Profile Image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         
@@ -37,8 +37,8 @@ final class ProfileViewController: UIViewController {
         imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
+    // Labels
     private func labelsConfigure() {
-        // Labels
         nameLabel.text = "Екатерина Новикова"
         nameLabel.textColor = .ypWhite
         nameLabel.font = .systemFont(ofSize: 23, weight: .bold)
@@ -71,13 +71,11 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 8).isActive = true
     }
     
+    // Quit Button
     private func exitButtonConfigure() {
-        // Quit Button
-        let button = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward")!,
-            target: self,
-            action: #selector(Self.didTapButton)
-        )
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "logout_button"), for: .normal)
+        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         
         button.tintColor = .ypRed
         button.translatesAutoresizingMaskIntoConstraints = false
