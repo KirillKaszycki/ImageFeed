@@ -48,17 +48,13 @@ final class ProfileViewController: UIViewController {
         loginLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
         descriptionLabel.text = "Hello, world!"
-        descriptionLabel.textColor = .ypGray
+        descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
-        
-        
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nameLabel)
-        loginLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loginLabel)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(descriptionLabel)
+        [nameLabel, loginLabel, descriptionLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
         
         
         nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
