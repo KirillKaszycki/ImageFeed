@@ -20,6 +20,7 @@
 		E3ACFC5F2BB5265300FCC311 /* ImageFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC5E2BB5265300FCC311 /* ImageFeedUITests.swift */; };
 		E3ACFC612BB5265300FCC311 /* ImageFeedUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACFC602BB5265300FCC311 /* ImageFeedUITestsLaunchTests.swift */; };
 		E3BF22B82BC7A399009F4876 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF22B72BC7A399009F4876 /* ProfileViewController.swift */; };
+		E3F272F32BDE16BD000A0523 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F272F22BDE16BD000A0523 /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		E3ACFC5E2BB5265300FCC311 /* ImageFeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITests.swift; sourceTree = "<group>"; };
 		E3ACFC602BB5265300FCC311 /* ImageFeedUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E3BF22B72BC7A399009F4876 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E3F272F22BDE16BD000A0523 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */,
 				E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */,
 				E314BD652BDCDDDE00543C78 /* Constants.swift */,
+				E3F272F12BDE16A3000A0523 /* Auth */,
 				E3601C3B2BC9430600D54BF6 /* SingleImage */,
 				E3DF2CE02BC7CA5D0078952A /* Profile */,
 				E35E3CDF2BB857A000C9FA5E /* ImagesList */,
@@ -161,6 +164,14 @@
 				E3BF22B72BC7A399009F4876 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		E3F272F12BDE16A3000A0523 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E3F272F22BDE16BD000A0523 /* AuthViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +309,7 @@
 				E3ACFC3E2BB5265000FCC311 /* AppDelegate.swift in Sources */,
 				E3BF22B82BC7A399009F4876 /* ProfileViewController.swift in Sources */,
 				E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */,
+				E3F272F32BDE16BD000A0523 /* AuthViewController.swift in Sources */,
 				E314BD662BDCDDDE00543C78 /* Constants.swift in Sources */,
 				E3197AD72BC8057A007ECCB5 /* SingleImageViewController.swift in Sources */,
 				E3ACFC402BB5265000FCC311 /* SceneDelegate.swift in Sources */,
