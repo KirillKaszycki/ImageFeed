@@ -33,12 +33,17 @@ extension AuthViewController {
 //MARK: - Extension for WebViewViewController Delegate
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //TODO: process code
+        OAuth2Service.shared.fetchOAuthToken(code: code) { result in
+            switch result {
+            case .success(let token):
+                print("Successfully fetched OAuth token:", token)
+            case .failure(let error):
+                print("Failed to fetch OAuth token:", error)
+            }
+        }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
     }
-    
-    
 }
