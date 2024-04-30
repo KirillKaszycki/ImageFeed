@@ -10,6 +10,7 @@
 		E314BD662BDCDDDE00543C78 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314BD652BDCDDDE00543C78 /* Constants.swift */; };
 		E3197AD72BC8057A007ECCB5 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3197AD62BC8057A007ECCB5 /* SingleImageViewController.swift */; };
 		E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */; };
+		E36534902BE0D444009815BF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365348F2BE0D444009815BF /* SplashViewController.swift */; };
 		E36CCBE32BDF512C0069DEDC /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36CCBE22BDF512C0069DEDC /* OAuth2Service.swift */; };
 		E36CCBE52BDF583E0069DEDC /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36CCBE42BDF583E0069DEDC /* URLSession+data.swift */; };
 		E36CCBE72BDF5BB80069DEDC /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36CCBE62BDF5BB80069DEDC /* OAuthTokenResponseBody.swift */; };
@@ -49,6 +50,7 @@
 		E314BD652BDCDDDE00543C78 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3197AD62BC8057A007ECCB5 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		E365348F2BE0D444009815BF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		E36CCBE22BDF512C0069DEDC /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		E36CCBE42BDF583E0069DEDC /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		E36CCBE62BDF5BB80069DEDC /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
@@ -113,6 +115,23 @@
 			path = SingleImage;
 			sourceTree = "<group>";
 		};
+		E36534912BE0D6DC009815BF /* ServiceAccessLayer */ = {
+			isa = PBXGroup;
+			children = (
+				E36CCBE22BDF512C0069DEDC /* OAuth2Service.swift */,
+				E36CCBEB2BDF69100069DEDC /* OAuth2TokenStorage.swift */,
+			);
+			path = ServiceAccessLayer;
+			sourceTree = "<group>";
+		};
+		E36534922BE0D704009815BF /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				E365348F2BE0D444009815BF /* SplashViewController.swift */,
+			);
+			path = SplashView;
+			sourceTree = "<group>";
+		};
 		E36CCBE82BDF68B20069DEDC /* WebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,10 +144,8 @@
 		E36CCBEA2BDF68C80069DEDC /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
-				E36CCBE22BDF512C0069DEDC /* OAuth2Service.swift */,
 				E36CCBE62BDF5BB80069DEDC /* OAuthTokenResponseBody.swift */,
 				E36CCBE42BDF583E0069DEDC /* URLSession+data.swift */,
-				E36CCBEB2BDF69100069DEDC /* OAuth2TokenStorage.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -159,6 +176,7 @@
 				E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */,
 				E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */,
 				E314BD652BDCDDDE00543C78 /* Constants.swift */,
+				E36534922BE0D704009815BF /* SplashView */,
 				E3F272F12BDE16A3000A0523 /* Auth */,
 				E3601C3B2BC9430600D54BF6 /* SingleImage */,
 				E3DF2CE02BC7CA5D0078952A /* Profile */,
@@ -199,6 +217,7 @@
 		E3F272F12BDE16A3000A0523 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				E36534912BE0D6DC009815BF /* ServiceAccessLayer */,
 				E36CCBE82BDF68B20069DEDC /* WebView */,
 				E36CCBEA2BDF68C80069DEDC /* OAuth */,
 			);
@@ -341,6 +360,7 @@
 				E3ACFC3E2BB5265000FCC311 /* AppDelegate.swift in Sources */,
 				E36CCBE52BDF583E0069DEDC /* URLSession+data.swift in Sources */,
 				E3BF22B82BC7A399009F4876 /* ProfileViewController.swift in Sources */,
+				E36534902BE0D444009815BF /* SplashViewController.swift in Sources */,
 				E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */,
 				E3F272F32BDE16BD000A0523 /* AuthViewController.swift in Sources */,
 				E314BD662BDCDDDE00543C78 /* Constants.swift in Sources */,

@@ -8,7 +8,7 @@
 import UIKit
 
 final class OAuth2TokenStorage {
-    static var token: String? {
+    var token: String? {
         get {
             return UserDefaults.standard.string(forKey: "OAuth2Token")
         }

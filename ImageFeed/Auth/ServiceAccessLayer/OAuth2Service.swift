@@ -13,7 +13,7 @@ final class OAuth2Service {
     private var lastRequestCode: String?
     private var task: URLSessionTask?
     
-    private init() {}
+    init() {}
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {
@@ -55,7 +55,8 @@ final class OAuth2Service {
             case .success(let data):
                 do {
                     let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                    OAuth2TokenStorage.token = tokenResponse.accessToken // Save token to UserDefaults
+                    let tokenStorage = OAuth2TokenStorage()
+                    tokenStorage.token = tokenResponse.accessToken // Save token to UserDefaults
                     completion(.success(tokenResponse.accessToken))
                 } catch {
                     print("Error decoding token response:", error)
