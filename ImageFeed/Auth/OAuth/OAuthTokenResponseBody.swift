@@ -21,11 +21,19 @@ struct OAuthTokenResponseBody: Decodable {
     let scope: String
     let createdAt: Int
     
-    // JSON-OAuthTokenResponseBody coincidence verification
     private enum Keys: String, CodingKey {
         case accessToken = "access_token"
         case tokenType = "token_type"
         case scope
         case createdAt = "created_at"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Keys.self)
+        accessToken = try container.decode(String.self, forKey: .accessToken)
+        tokenType = try container.decode(String.self, forKey: .tokenType)
+        scope = try container.decode(String.self, forKey: .scope)
+        createdAt = try container.decode(Int.self, forKey: .createdAt)
+    }
 }
+
