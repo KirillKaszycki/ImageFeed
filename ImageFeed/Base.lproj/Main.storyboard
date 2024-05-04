@@ -79,7 +79,7 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fEq-X2-Fnt">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fEq-X2-Fnt">
                                 <rect key="frame" x="0.0" y="40" width="393" height="4"/>
                                 <color key="tintColor" name="YPBlack"/>
                             </progressView>
