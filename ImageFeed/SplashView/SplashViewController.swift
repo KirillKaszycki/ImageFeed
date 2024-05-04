@@ -10,12 +10,12 @@ import UIKit
 final class SplashViewController: UIViewController {
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let storage = OAuth2TokenStorage()
-    let service = OAuth2Service()
+    private let service = OAuth2Service.shared
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let token = storage.token {
+        if storage.token != nil {
             switchToTabBarController()
         } else {
             // Show Auth Screen

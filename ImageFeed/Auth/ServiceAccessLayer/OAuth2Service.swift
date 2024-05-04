@@ -13,7 +13,7 @@ final class OAuth2Service {
     private var lastRequestCode: String?
     private var task: URLSessionTask?
     
-    init() {}
+    private init() {}
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {
@@ -69,16 +69,4 @@ final class OAuth2Service {
             }
             task?.resume()
         }
-//    func fetchOAuthToken(code: String, completion: @escaping(Result<String, Error>) -> Void) {
-//        assert(Thread.isMainThread)
-//        guard lastRequestCode == code else { return }
-//        task?.cancel()
-//        
-//        guard let request = makeOAuthTokenRequest(code: code) else { return }
-//        lastRequestCode = code
-//        
-//        let task = URLSession.shared.data(for: request, completion: completion)
-//        
-//    }
-    
 }
