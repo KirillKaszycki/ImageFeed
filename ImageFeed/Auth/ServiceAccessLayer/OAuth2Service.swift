@@ -27,9 +27,9 @@ final class OAuth2Service {
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         components?.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.AccessKey),
-            URLQueryItem(name: "client_secret", value: Constants.SecretKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.RedirectURI),
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "client_secret", value: Constants.secretKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
@@ -44,29 +44,41 @@ final class OAuth2Service {
         return request
     }
     
-    func fetchOAuthToken(code: String, completion: @escaping(Result<String, Error>) -> Void) {
-        guard let request = makeOAuthTokenRequest(code: code) else {
-            completion(.failure(NetworkError.urlSessionError))
-            return
-        }
-
-        task = URLSession.shared.data(for: request) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                    let tokenStorage = OAuth2TokenStorage()
-                    tokenStorage.token = tokenResponse.accessToken // Save token to UserDefaults
-                    completion(.success(tokenResponse.accessToken))
-                } catch {
-                    print("Error decoding token response:", error)
+        func fetchOAuthToken(code: String, completion: @escaping(Result<String, Error>) -> Void) {
+            guard let request = makeOAuthTokenRequest(code: code) else {
+                completion(.failure(NetworkError.urlSessionError))
+                return
+            }
+    
+            task = URLSession.shared.data(for: request) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
+                        let tokenStorage = OAuth2TokenStorage()
+                        tokenStorage.token = tokenResponse.accessToken // Save token to UserDefaults
+                        completion(.success(tokenResponse.accessToken))
+                    } catch {
+                        print("Error decoding token response:", error)
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    print("Network error:", error)
                     completion(.failure(error))
                 }
-            case .failure(let error):
-                print("Network error:", error)
-                completion(.failure(error))
             }
+            task?.resume()
         }
-        task?.resume()
-    }
+//    func fetchOAuthToken(code: String, completion: @escaping(Result<String, Error>) -> Void) {
+//        assert(Thread.isMainThread)
+//        guard lastRequestCode == code else { return }
+//        task?.cancel()
+//        
+//        guard let request = makeOAuthTokenRequest(code: code) else { return }
+//        lastRequestCode = code
+//        
+//        let task = URLSession.shared.data(for: request, completion: completion)
+//        
+//    }
+    
 }
