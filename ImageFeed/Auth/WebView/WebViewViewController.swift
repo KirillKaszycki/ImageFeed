@@ -54,6 +54,11 @@ final class WebViewViewController: UIViewController {
         }
     }
     
+    @IBAction func didTapBackButton(_ sender: Any) {
+        delegate?.webViewViewControllerDidCancel(self)
+    }
+    
+    
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
         progressView.setProgress(progressView.progress, animated: true)

@@ -83,6 +83,18 @@
                                 <rect key="frame" x="0.0" y="40" width="393" height="4"/>
                                 <color key="tintColor" name="YPBlack"/>
                             </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihz-1K-H90">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="JZb-dm-Yhq"/>
+                                    <constraint firstAttribute="height" constant="44" id="ffD-lI-ThJ"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="nav_back_button"/>
+                                <connections>
+                                    <action selector="didTapBackButton:" destination="e05-qI-hC7" eventType="touchUpInside" id="rKl-2q-yXK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dzz-hS-uUc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -92,8 +104,10 @@
                             <constraint firstItem="fEq-X2-Fnt" firstAttribute="top" secondItem="Dzz-hS-uUc" secondAttribute="top" constant="40" id="IVH-eo-7KY"/>
                             <constraint firstItem="Dzz-hS-uUc" firstAttribute="bottom" secondItem="lSl-dA-ZYe" secondAttribute="bottom" id="Vwy-AQ-lVQ"/>
                             <constraint firstItem="fEq-X2-Fnt" firstAttribute="leading" secondItem="Dzz-hS-uUc" secondAttribute="leading" id="ha7-0Y-LXp"/>
+                            <constraint firstItem="ihz-1K-H90" firstAttribute="leading" secondItem="Dzz-hS-uUc" secondAttribute="leading" id="jUk-Ql-whB"/>
                             <constraint firstItem="lSl-dA-ZYe" firstAttribute="top" secondItem="Dzz-hS-uUc" secondAttribute="top" id="maw-KV-iCg"/>
                             <constraint firstItem="Dzz-hS-uUc" firstAttribute="trailing" secondItem="lSl-dA-ZYe" secondAttribute="trailing" id="saZ-ap-Um8"/>
+                            <constraint firstItem="ihz-1K-H90" firstAttribute="top" secondItem="Dzz-hS-uUc" secondAttribute="top" id="zdF-le-fUw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Q6P-Bo-riH"/>
@@ -104,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFN-y9-rWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1934" y="-1108"/>
+            <point key="canvasLocation" x="1933.5877862595419" y="-1108.4507042253522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jx8-Kr-wOd">
@@ -363,6 +377,7 @@
         <image name="Backward" width="24" height="24"/>
         <image name="auth_screen_logo" width="60" height="60"/>
         <image name="like_button_on" width="42" height="42"/>
+        <image name="nav_back_button" width="24" height="24"/>
         <image name="share_button" width="50" height="50"/>
         <image name="splach_screen_logo" width="72.666664123535156" height="75.333335876464844"/>
         <image name="tab_editorial_active" width="31" height="30"/>
