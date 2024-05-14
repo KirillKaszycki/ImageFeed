@@ -7,6 +7,10 @@
 
 import UIKit
 
+fileprivate enum AuthServiceError: Error {
+    case invalidRequest
+}
+
 final class OAuth2Service {
     
     static let shared = OAuth2Service()
@@ -44,13 +48,30 @@ final class OAuth2Service {
         return request
     }
     
-        func fetchOAuthToken(code: String, completion: @escaping(Result<String, Error>) -> Void) {
-            guard let request = makeOAuthTokenRequest(code: code) else {
-                completion(.failure(NetworkError.urlSessionError))
+    func fetchOAuthToken(code: String, completion: @escaping(Result<String, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        if task != nil {
+            if lastRequestCode != code {
+                task?.cancel()
+            } else {
+                completion(.failure(AuthServiceError.invalidRequest))
                 return
             }
-    
-            task = URLSession.shared.data(for: request) { result in
+        } else {
+            if lastRequestCode == code {
+                completion(.failure(AuthServiceError.invalidRequest))
+                return
+            }
+        }
+        lastRequestCode = code
+        
+        guard let request = makeOAuthTokenRequest(code: code) else {
+            completion(.failure(NetworkError.urlSessionError))
+            return
+        }
+
+        task = URLSession.shared.data(for: request) { result in
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
                     do {
@@ -66,7 +87,11 @@ final class OAuth2Service {
                     print("Network error:", error)
                     completion(.failure(error))
                 }
+                
+                self.task = nil
+                self.lastRequestCode = nil
             }
-            task?.resume()
         }
+        task?.resume()
+    }
 }

@@ -53,12 +53,13 @@ extension AuthViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         vc.dismiss(animated: true)
-        ProgressHUD.animate()
+        UIBlockingProgressHUD.show()
         
         OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
-            ProgressHUD.dismiss()
-             guard let self = self else { return }
-             
+            
+            guard let self = self else { return }
+            UIBlockingProgressHUD.dismiss()
+            
              switch result {
              case .success(let token):
                  self.delegate?.authViewController(self, didAuthenticateWithCode: code)
