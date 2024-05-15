@@ -13,9 +13,9 @@ struct Profile {
     let loginName: String?
     let bio: String?
     
-    init(profileResult: ProfilResult) {
-        username = profileResult.login
-        loginName = "@" + (username ?? "")
+    init(profileResult: ProfileResult) {
+        username = profileResult.username
+        loginName = "@\(username ?? "")"
         name = "\(profileResult.first_name ?? "") \(profileResult.last_name ?? "")"
         bio = profileResult.bio
     }

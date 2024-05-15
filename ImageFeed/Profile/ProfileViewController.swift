@@ -24,10 +24,7 @@ final class ProfileViewController: UIViewController {
         profileImageConfigure()
         labelsConfigure()
         exitButtonConfigure()
-        
-        if let profile = ProfileService.shared.profileData {
-            loadProfileData(profile: profile)
-        }
+        loadProfileData()
     }
     
     // Profile Image
@@ -43,15 +40,18 @@ final class ProfileViewController: UIViewController {
     
     // Labels
     private func labelsConfigure() {
-        nameLabel.text = "Екатерина Новикова"
+        // nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = "Name loading..."
         nameLabel.textColor = .ypWhite
         nameLabel.font = .systemFont(ofSize: 23, weight: .bold)
         
-        loginLabel.text = "@ekaterina_nov"
+        // loginLabel.text = "@ekaterina_nov"
+        loginLabel.text = "@username loading..."
         loginLabel.textColor = .ypGray
         loginLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
-        descriptionLabel.text = "Hello, world!"
+        // descriptionLabel.text = "Hello, world!"
+        descriptionLabel.text = "Bio loading"
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
@@ -91,29 +91,23 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController {
-//    private func loadProfileData() {
-//        let tokenStorage = OAuth2TokenStorage()
-//        
-//        guard let token = tokenStorage.token else { return }
-//        
-//        ProfileService.shared.fetchProfile(token) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let profile):
-//                DispatchQueue.main.async {
-//                    self.nameLabel.text = profile.name
-//                    self.loginLabel.text = profile.loginName
-//                    self.descriptionLabel.text = profile.bio
-//                }
-//            case .failure(let error):
-//                print("Error fetching profile: \(error)")
-//            }
-//        }
-//    }
-    
-    private func loadProfileData(profile: Profile) {
-        self.nameLabel.text = profile.name
-        self.loginLabel.text = profile.loginName
-        self.descriptionLabel.text = profile.bio
+    private func loadProfileData() {
+        let tokenStorage = OAuth2TokenStorage()
+        
+        guard let token = tokenStorage.token else { return }
+        
+        ProfileService.shared.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let profile):
+                DispatchQueue.main.async {
+                    self.nameLabel.text = profile.name
+                    self.loginLabel.text = profile.loginName
+                    self.descriptionLabel.text = profile.bio
+                }
+            case .failure(let error):
+                print("Error fetching profile: \(error)")
+            }
+        }
     }
 }

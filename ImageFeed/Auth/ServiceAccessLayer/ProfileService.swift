@@ -34,7 +34,7 @@ final class ProfileService {
             switch result {
             case .success(let data):
                 do {
-                    let profileResult = try JSONDecoder().decode(ProfilResult.self, from: data)
+                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
                     let profile = Profile(profileResult: profileResult)
                     
                     // Successfully parsed via completion
@@ -50,6 +50,7 @@ final class ProfileService {
                 print("Parsing error via completion")
             }
         }
+        task.resume()
     }
 
 }
