@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileService {
     
-    private(set) var profileData: Profile? // Private rewriting access with (set)
+    private(set) var profile: Profile? // Private rewriting access with (set)
     private var task: URLSessionTask?
     
     static var shared = ProfileService() // Do the singletone pattern
@@ -52,5 +52,4 @@ final class ProfileService {
         }
         task.resume()
     }
-
 }

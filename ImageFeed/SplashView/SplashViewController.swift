@@ -78,9 +78,10 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let profileResult):
                 self.switchToTabBarController()
-                guard let username = profileResult.username else { return }
-            case .failure:
+                
+            case .failure(let error):
                 // 11
+                print("Parsing Data Error \(error)")
                 break
             }
         }

@@ -24,8 +24,8 @@ final class ProfileViewController: UIViewController {
         profileImageConfigure()
         labelsConfigure()
         exitButtonConfigure()
-        if let profile = ProfileService.shared.profileData {
-            updateProfileData(profile: profile)
+        if let profile = ProfileService.shared.profile {
+            updateProfileDetails(profile: profile)
         }
     }
     
@@ -53,7 +53,7 @@ final class ProfileViewController: UIViewController {
         loginLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
         // descriptionLabel.text = "Hello, world!"
-        descriptionLabel.text = "Bio loading"
+        descriptionLabel.text = "Bio loading..."
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
@@ -113,7 +113,7 @@ extension ProfileViewController {
 //        }
 //    }
     
-    private func updateProfileData(profile: Profile) {
+    private func updateProfileDetails(profile: Profile) {
         self.nameLabel.text = profile.name
         self.loginLabel.text = profile.loginName
         self.descriptionLabel.text = profile.bio
