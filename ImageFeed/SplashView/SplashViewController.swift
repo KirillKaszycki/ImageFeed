@@ -68,17 +68,15 @@ extension SplashViewController: AuthViewControllerDelegate {
         fetchProfile(token)
     }
     
-    private func fetchProfile(_ token: String) {
+    private func fetchProfile(_ token: String){
         UIBlockingProgressHUD.show()
         profileService.fetchProfile(token) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
-            
             guard let self = self else { return }
-            
+
             switch result {
-            case .success(let profileResult):
+            case .success:
                 self.switchToTabBarController()
-                
             case .failure(let error):
                 // 11
                 print("Parsing Data Error \(error)")

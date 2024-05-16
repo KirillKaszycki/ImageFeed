@@ -9,14 +9,13 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    private var profilePhoto = UIImage()
+    private let profileService = ProfileService.shared
     
+    private var profilePhoto = UIImage()
     private var nameLabel = UILabel()
     private var loginLabel = UILabel()
     private var descriptionLabel = UILabel()
-    
     private var exitButton = UIButton()
-    
     private let imageView = UIImageView(image: .avatar)
     
     override func viewDidLoad() {
@@ -24,7 +23,7 @@ final class ProfileViewController: UIViewController {
         profileImageConfigure()
         labelsConfigure()
         exitButtonConfigure()
-        if let profile = ProfileService.shared.profile {
+        if let profile = profileService.profile {
             updateProfileDetails(profile: profile)
         }
     }

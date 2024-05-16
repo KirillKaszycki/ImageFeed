@@ -11,8 +11,9 @@ final class ProfileService {
     
     private(set) var profile: Profile? // Private rewriting access with (set)
     private var task: URLSessionTask?
+    private var lastToken: String?
     
-    static var shared = ProfileService() // Do the singletone pattern
+    static let shared = ProfileService() // Do the singletone pattern
     
     private init() {} // Do the singletone pattern
     
@@ -28,15 +29,17 @@ final class ProfileService {
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
+        lastToken = token
         
         let request = createProfileRequest(token: token)
         let task = URLSession.shared.data(for: request) { result in
+            
             switch result {
             case .success(let data):
                 do {
                     let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
                     let profile = Profile(profileResult: profileResult)
-                    
+                    self.profile = profile
                     // Successfully parsed via completion
                     completion(.success(profile))
                     print("Successfully parsed via completion")
@@ -49,6 +52,8 @@ final class ProfileService {
                 completion(.failure(error))
                 print("Parsing error via completion")
             }
+            self.lastToken = nil
+            self.task = nil
         }
         task.resume()
     }
