@@ -92,26 +92,6 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController {
-//    private func loadProfileData() {
-//        let tokenStorage = OAuth2TokenStorage()
-//        
-//        guard let token = tokenStorage.token else { return }
-//        
-//        ProfileService.shared.fetchProfile(token) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let profile):
-//                DispatchQueue.main.async {
-//                    self.nameLabel.text = profile.name
-//                    self.loginLabel.text = profile.loginName
-//                    self.descriptionLabel.text = profile.bio
-//                }
-//            case .failure(let error):
-//                print("Error fetching profile: \(error)")
-//            }
-//        }
-//    }
-    
     private func updateProfileDetails(profile: Profile) {
         self.nameLabel.text = profile.name
         self.loginLabel.text = profile.loginName
