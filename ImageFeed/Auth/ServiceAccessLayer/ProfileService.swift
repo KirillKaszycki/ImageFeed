@@ -32,7 +32,7 @@ final class ProfileService {
         lastToken = token
         
         let request = createProfileRequest(token: token)
-        let task = URLSession.shared.data(for: request) { result in
+        let task = URLSession.shared.data(for: request) { [self] result in
             
             switch result {
             case .success(let data):

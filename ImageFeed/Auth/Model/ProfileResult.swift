@@ -12,6 +12,7 @@ struct ProfileResult: Codable {
     let first_name: String?
     let last_name: String?
     let bio: String?
+    let profile_image: ProfileImage?
 }
 
 
