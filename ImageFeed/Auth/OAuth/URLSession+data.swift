@@ -14,6 +14,7 @@ enum NetworkError: Error {
     case decodingError
     case httpStatusCode(Int, String)
     case imageURLParsingError
+    case invalidRequest
 }
 
 
