@@ -32,29 +32,25 @@ final class ProfileImageService {
         
         guard let request = createProfileImageRequest(username: username) else { return }
         
-        let task = URLSession.shared.data(for: request) { [weak self] (result: Result<Data, Error>) in
+        let task = URLSession.shared.data(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             guard let self = self else { return }
             
             switch result {
-            case .success(let data):
-                do {
-                    // Assuming ProfileResult conforms to Decodable
-                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
-                    if let avatarURL = profileResult.profile_image?.small {
-                        self.avatarURL = avatarURL
-                        completion(.success(avatarURL))
-                        print("Image parsing succeeded")
-                    } else {
-                        print("Parsing image Error")
-                        completion(.failure(NSError(domain: "ParsingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to parse profile image URL"])))
-                    }
-                } catch {
-                    completion(.failure(error))
+            case .success(let image):
+                guard let avatarURL = image.profile_image?.small else {
+                    completion(.failure(NetworkError.imageURLParsingError))
+                    print("Image URL parsing error")
+                    return
                 }
+                self.avatarURL = avatarURL
+                completion(.success(avatarURL))
+                print("Image URL successfully parsed")
+                
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+        self.task = task
         task.resume()
     }
 }
