@@ -10,6 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     private var profilePhoto = UIImage()
     private var nameLabel = UILabel()
@@ -17,6 +18,48 @@ final class ProfileViewController: UIViewController {
     private var descriptionLabel = UILabel()
     private var exitButton = UIButton()
     private let imageView = UIImageView(image: .avatar)
+    
+    private var profileImageServiceObserver: NSObjectProtocol?
+
+    // I'll remove it later. Now I preservet it for potential debug
+//    override init(nibName: String?, bundle: Bundle?) {
+//         super.init(nibName: nibName, bundle: bundle)
+//         addObserver()
+//     }
+//    
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//        addObserver()
+//    }
+//    
+//    deinit {
+//        removeObserver()
+//    }
+//    
+//    private func addObserver() {
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(updateAvatar(notification:)),
+//            name: ProfileImageService.didChangeNotofication,
+//            object: nil)
+//    }
+//    
+//    private func removeObserver() {
+//        NotificationCenter.default.removeObserver(
+//            self,
+//            name: ProfileImageService.didChangeNotofication,
+//            object: nil)
+//    }
+//    
+//    @objc
+//    private func updateAvatar(notification: Notification) {
+//        guard
+//            isViewLoaded,
+//            let userInfo = notification.userInfo,
+//            let profileImageURL = userInfo["URL"] as? String,
+//            let url = URL(string: profileImageURL)
+//        else { return }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +69,29 @@ final class ProfileViewController: UIViewController {
         if let profile = profileService.profile {
             updateProfileDetails(profile: profile)
         }
+        configUpdateAvatarForVDL()
     }
     
     // Profile Image
+    private func updateAvatar() {
+        guard
+            let profileImageURL = profileImageService.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        //
+    }
+    
+    private func configUpdateAvatarForVDL() {
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotofication,
+            object: nil,
+            queue: .main) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
+    }
+    
     private func profileImageConfigure() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -97,4 +160,8 @@ extension ProfileViewController {
         self.loginLabel.text = profile.login_name
         self.descriptionLabel.text = profile.bio
     }
+}
+
+extension ProfileViewController {
+   
 }

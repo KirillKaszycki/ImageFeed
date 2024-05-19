@@ -19,7 +19,7 @@ enum NetworkError: Error {
 
 
 extension URLSession {
-    func data <T: Decodable>(
+    func objectTask <T: Decodable>(
         for request: URLRequest,
         completion: @escaping (Result<T, Error>) -> Void
     ) -> URLSessionTask {
@@ -39,6 +39,7 @@ extension URLSession {
                         fulfillCompletionOnTheMainThread(.success(result))
                     } catch {
                         fulfillCompletionOnTheMainThread(.failure(NetworkError.decodingError))
+                        print("Ошибка декодирования: \(error.localizedDescription), Данные: \(String(data: data, encoding: .utf8) ?? "")")
                     }
                 } else {
                     let errorMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)

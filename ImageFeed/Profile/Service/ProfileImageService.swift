@@ -12,6 +12,7 @@ final class ProfileImageService {
     private let token = OAuth2TokenStorage()
     private var task: URLSessionTask?
     private(set) var avatarURL: String?
+    static let didChangeNotofication = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     static let shared = ProfileImageService()
     private init() {}
@@ -31,21 +32,27 @@ final class ProfileImageService {
         
         guard let request = createProfileImageRequest(username: username) else { return }
         
-        let task = URLSession.shared.data(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             guard let self = self else { return }
             
             switch result {
             case .success(let image):
-                guard let avatarURL = image.profileImage?.small else {
+                guard let profileImageURL = image.profileImage?.small else {
                     completion(.failure(NetworkError.imageURLParsingError))
                     print("Image URL parsing error")
                     return
                 }
-                self.avatarURL = avatarURL
-                completion(.success(avatarURL))
+                self.avatarURL = profileImageURL
+                completion(.success(profileImageURL))
                 print("Image URL successfully parsed")
                 
+                NotificationCenter.default.post(
+                    name: ProfileImageService.didChangeNotofication,
+                    object: self,
+                    userInfo: ["URL": profileImageURL])
+                
             case .failure(let error):
+                print("[fetchProfileImageURL]: \(error) - \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

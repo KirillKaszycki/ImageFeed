@@ -33,22 +33,22 @@ final class ProfileService {
         lastToken = token
         
         let request = createProfileRequest(token: token)
-        let task = URLSession.shared.data(for: request) { [self] (result: Result<ProfileResult, Error>) in
+        let task = URLSession.shared.objectTask(for: request) { [self] (result: Result<ProfileResult, Error>) in
             
             switch result {
             case .success(let profileResult):
                 let profile = Profile(profileResult: profileResult)
                 self.profile = profile
                 
-                guard let userName = profile.username else { return }
-                profileImageService.fetchProfileImageURL(username: userName) { _ in }
+                // guard let userName = profile.username else { return }
+                // profileImageService.fetchProfileImageURL(username: userName) { _ in }
                 
                 // Successfully parsed via completion
                 completion(.success(profile))
                 print("Successfully parsed via completion")
             case .failure(let error):
+                print("[fetchProfile]: \(error) - \(error.localizedDescription)")
                 completion(.failure(error))
-                print("Parsing error via completion")
             }
             self.lastToken = nil
             self.task = nil

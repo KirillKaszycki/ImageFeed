@@ -70,7 +70,7 @@ final class OAuth2Service {
             return
         }
 
-        let task = URLSession.shared.data(for: request) { [weak self] (response: Result<OAuthTokenResponseBody, Error>) in
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (response: Result<OAuthTokenResponseBody, Error>) in
             guard let self = self else { return }
             
             switch response {
@@ -81,7 +81,7 @@ final class OAuth2Service {
                 completion(.success(authToken))
                 print("Authorizing successfull")
             case .failure(let error):
-                print("Authorizing error:", error)
+                print("[OAurh2Service]: \(error) - \(error.localizedDescription)")
                 completion(.failure(error))
             }
             
