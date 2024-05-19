@@ -15,6 +15,8 @@ final class SplashViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     
+    private let alertPresenter = AlertPresenter()
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -65,9 +67,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        
-//        guard let token = storage.token else { return }
-//        fetchProfile(token)
     }
     
     private func fetchProfile(_ token: String){
@@ -82,9 +81,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                 profileImageService.fetchProfileImageURL(username: username) { _ in }
                 self.switchToTabBarController()
             case .failure(let error):
-                // 11
                 print("Parsing Data Error \(error)")
-                break
+                alertPresenter.presentAlert(on: self, message: "Не удалось получить данные профиля - \(error)")
             }
         }
     }
@@ -95,10 +93,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success:
                 self.switchToTabBarController()
-            case .failure:
-                // 11
-                print("Cannot switch to TabBarVC")
-                break
+            case .failure(let error):
+                print("[SplashViewController] [fetchProfile] Error - \(error)")
+                alertPresenter.presentAlert(on: self, message: "Не удалось войти в систему - \(error)")
             }
         }
     }

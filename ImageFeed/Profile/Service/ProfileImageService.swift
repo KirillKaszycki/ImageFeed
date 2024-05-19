@@ -38,7 +38,7 @@ final class ProfileImageService {
             
             switch result {
             case .success(let image):
-                guard let profileImageURL = image.profileImage?.small else {
+                guard let profileImageURL = image.profileImage?.large else {
                     completion(.failure(NetworkError.imageURLParsingError))
                     print("Image URL parsing error")
                     return

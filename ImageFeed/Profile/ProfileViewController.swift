@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
@@ -17,7 +18,14 @@ final class ProfileViewController: UIViewController {
     private var loginLabel = UILabel()
     private var descriptionLabel = UILabel()
     private var exitButton = UIButton()
-    private let imageView = UIImageView(image: .avatar)
+    private let imageView: UIImageView = {
+        let avatar = UIImageView()
+        avatar.image = UIImage(named: "avatar")
+        avatar.layer.cornerRadius = 35 // As a default the picture is squared
+        avatar.translatesAutoresizingMaskIntoConstraints = false
+        avatar.clipsToBounds = true
+        return avatar
+    }()
     
     private var profileImageServiceObserver: NSObjectProtocol?
 
@@ -78,7 +86,7 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = profileImageService.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        //
+        imageView.kf.setImage(with: url)
     }
     
     private func configUpdateAvatarForVDL() {
