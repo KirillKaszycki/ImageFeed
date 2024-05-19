@@ -19,7 +19,7 @@ final class ProfileService {
     private init() {} // Do the singletone pattern
     
     private func createProfileRequest(token: String) -> URLRequest {
-        let baseURL = Constants.defaultBaseURL
+        let baseURL = APIConstants.defaultBaseURL
         var request = URLRequest(url: URL(string: "/me",
                                           relativeTo: baseURL)!)
         request.httpMethod = "GET"
@@ -40,12 +40,13 @@ final class ProfileService {
                 let profile = Profile(profileResult: profileResult)
                 self.profile = profile
                 
-                // guard let userName = profile.username else { return }
-                // profileImageService.fetchProfileImageURL(username: userName) { _ in }
-                
                 // Successfully parsed via completion
                 completion(.success(profile))
-                print("Successfully parsed via completion")
+                
+                guard let userName = profile.username else { return }
+                profileImageService.fetchProfileImageURL(username: userName) { _ in }
+                
+                print("Profile data successfully parsed via completion \n\(profile) \n")
             case .failure(let error):
                 print("[fetchProfile]: \(error) - \(error.localizedDescription)")
                 completion(.failure(error))

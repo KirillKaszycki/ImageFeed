@@ -18,11 +18,12 @@ final class ProfileImageService {
     private init() {}
     
     private func createProfileImageRequest(username: String) -> URLRequest? {
-        guard let profileURL = URL(string: Constants.profileURL + username) else { return nil }
+        guard let profileURL = URL(string: ProfileConstants.ProfileImageRequest + username) else { return nil }
         var request = URLRequest(url: profileURL)
         request.httpMethod = "GET"
         
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        guard let profileToken = token.token else { return nil }
+        request.setValue("Bearer \(profileToken)", forHTTPHeaderField: "Authorization")
         return request
     }
     
@@ -44,7 +45,7 @@ final class ProfileImageService {
                 }
                 self.avatarURL = profileImageURL
                 completion(.success(profileImageURL))
-                print("Image URL successfully parsed")
+                print("Image URL successfully parsed via completion  \n\(profileImageURL) \n")
                 
                 NotificationCenter.default.post(
                     name: ProfileImageService.didChangeNotofication,

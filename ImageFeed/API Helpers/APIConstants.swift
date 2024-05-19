@@ -8,7 +8,7 @@
 import UIKit
 
 // API Constants
-enum Constants {
+enum APIConstants {
     static let accessKey = "TfJQgGEh9T3FxTGFW-8ihSviLF3FMzgkHaR8_bpAcdE"
     static let secretKey = "k30QIythuXMmAm6ZqeqxiwHxqsKQsS6FsTi8m1EVj8k"
     static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
@@ -17,13 +17,3 @@ enum Constants {
     static let profileURL = "https://api.unsplash.com/users/"
 }
 
-// WebView Constants
-enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    static let unsplashTokenRequestString = "https://unsplash.com/oauth/token"
-}
-
-enum ProfileConstants {
-    static let unsplashProfileRequest = "https://api.unsplash.com/me"
-    static let unsplashProfileImageRequest = "https://api.unsplash.com/users/"
-}

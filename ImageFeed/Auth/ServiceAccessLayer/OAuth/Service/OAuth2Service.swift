@@ -31,9 +31,9 @@ final class OAuth2Service {
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         components?.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "client_secret", value: Constants.secretKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+            URLQueryItem(name: "client_id", value: APIConstants.accessKey),
+            URLQueryItem(name: "client_secret", value: APIConstants.secretKey),
+            URLQueryItem(name: "redirect_uri", value: APIConstants.redirectURI),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
