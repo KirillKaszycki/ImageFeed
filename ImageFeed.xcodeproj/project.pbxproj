@@ -132,10 +132,7 @@
 		E36534912BE0D6DC009815BF /* ServiceAccessLayer */ = {
 			isa = PBXGroup;
 			children = (
-				E36CCBE22BDF512C0069DEDC /* OAuth2Service.swift */,
-				E36CCBEB2BDF69100069DEDC /* OAuth2TokenStorage.swift */,
-				E3FA97802BF47A450070B243 /* ProfileService.swift */,
-				E3A74C782BF6EEE700699185 /* ProfileImageService.swift */,
+				E36CCBEA2BDF68C80069DEDC /* OAuth */,
 			);
 			path = ServiceAccessLayer;
 			sourceTree = "<group>";
@@ -160,10 +157,36 @@
 		E36CCBEA2BDF68C80069DEDC /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
-				E36CCBE62BDF5BB80069DEDC /* OAuthTokenResponseBody.swift */,
-				E36CCBE42BDF583E0069DEDC /* URLSession+data.swift */,
+				E37D91322BFA3A880069F213 /* Models */,
+				E37D91312BFA3A790069F213 /* Service */,
 			);
 			path = OAuth;
+			sourceTree = "<group>";
+		};
+		E37D91302BFA3A560069F213 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E3FA97802BF47A450070B243 /* ProfileService.swift */,
+				E3A74C782BF6EEE700699185 /* ProfileImageService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E37D91312BFA3A790069F213 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E36CCBE22BDF512C0069DEDC /* OAuth2Service.swift */,
+				E36CCBEB2BDF69100069DEDC /* OAuth2TokenStorage.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E37D91322BFA3A880069F213 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E36CCBE62BDF5BB80069DEDC /* OAuthTokenResponseBody.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E3A74C762BF6EE4A00699185 /* Model */ = {
@@ -210,11 +233,11 @@
 				E3ACFC3D2BB5265000FCC311 /* AppDelegate.swift */,
 				E3ACFC3F2BB5265000FCC311 /* SceneDelegate.swift */,
 				E314BD652BDCDDDE00543C78 /* Constants.swift */,
-				E36534922BE0D704009815BF /* SplashView */,
 				E3F272F12BDE16A3000A0523 /* Auth */,
-				E3601C3B2BC9430600D54BF6 /* SingleImage */,
+				E36534922BE0D704009815BF /* SplashView */,
 				E3DF2CE02BC7CA5D0078952A /* Profile */,
 				E35E3CDF2BB857A000C9FA5E /* ImagesList */,
+				E3601C3B2BC9430600D54BF6 /* SingleImage */,
 				E3ACFC432BB5265000FCC311 /* Main.storyboard */,
 				E3ACFC462BB5265200FCC311 /* Assets.xcassets */,
 				E3ACFC482BB5265200FCC311 /* LaunchScreen.storyboard */,
@@ -243,6 +266,8 @@
 		E3DF2CE02BC7CA5D0078952A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E3A74C762BF6EE4A00699185 /* Model */,
+				E37D91302BFA3A560069F213 /* Service */,
 				E3BF22B72BC7A399009F4876 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -251,11 +276,10 @@
 		E3F272F12BDE16A3000A0523 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				E3A74C772BF6EE8900699185 /* AuthView */,
-				E3A74C762BF6EE4A00699185 /* Model */,
+				E36CCBE42BDF583E0069DEDC /* URLSession+data.swift */,
 				E36534912BE0D6DC009815BF /* ServiceAccessLayer */,
+				E3A74C772BF6EE8900699185 /* AuthView */,
 				E36CCBE82BDF68B20069DEDC /* WebView */,
-				E36CCBEA2BDF68C80069DEDC /* OAuth */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
