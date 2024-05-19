@@ -94,7 +94,7 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController {
     private func updateProfileDetails(profile: Profile) {
         self.nameLabel.text = profile.name
-        self.loginLabel.text = profile.loginName
+        self.loginLabel.text = profile.login_name
         self.descriptionLabel.text = profile.bio
     }
 }

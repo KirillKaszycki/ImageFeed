@@ -25,7 +25,6 @@ final class ProfileImageService {
         return request
     }
     
-    // REDO
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
@@ -37,7 +36,7 @@ final class ProfileImageService {
             
             switch result {
             case .success(let image):
-                guard let avatarURL = image.profile_image?.small else {
+                guard let avatarURL = image.profileImage?.small else {
                     completion(.failure(NetworkError.imageURLParsingError))
                     print("Image URL parsing error")
                     return

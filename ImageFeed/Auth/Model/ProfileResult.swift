@@ -9,10 +9,10 @@ import UIKit
 
 struct ProfileResult: Codable {
     let username: String?
-    let first_name: String?
-    let last_name: String?
+    let firstName: String?
+    let lastName: String?
     let bio: String?
-    let profile_image: ProfileImage?
+    let profileImage: ProfileImage?
 }
 
 

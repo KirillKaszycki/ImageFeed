@@ -76,6 +76,8 @@ final class OAuth2Service {
             switch response {
             case .success(let res):
                 let authToken = res.accessToken
+                let tokenStorage = OAuth2TokenStorage()
+                tokenStorage.token = authToken
                 completion(.success(authToken))
                 print("Authorizing successfull")
             case .failure(let error):
