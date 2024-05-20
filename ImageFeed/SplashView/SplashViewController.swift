@@ -17,27 +17,48 @@ final class SplashViewController: UIViewController {
     
     private let alertPresenter = AlertPresenter()
     
+    private let logo: UIImageView = {
+        let logo = UIImageView()
+        logo.image = UIImage(named: "splach_screen_logo")
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        return logo
+    } ()
+    
+    //MARK: - Life cycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        configSplashViewController()
+        
         if let token = storage.token {
             fetchProfile(token)
-            switchToTabBarController()
         } else {
-            // Show Auth Screen
-            performSegue(withIdentifier: ShowAuthenticationScreenSegueIdentifier, sender: nil)
+            switchToAuthViewController()
         }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
     }
+    
+    // MARK: Config the SplashViewCOntroller appearence
+    private func configSplashViewController() {
+        view.backgroundColor = .ypBlack
+        
+        // Logo position config
+        self.view.addSubview(logo)
+        NSLayoutConstraint.activate([
+            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
 
+    // MARK: Congig the navigation
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
@@ -46,8 +67,21 @@ final class SplashViewController: UIViewController {
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
+    
+    private func switchToAuthViewController() {
+        guard let authViewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "AuthViewController") as? AuthViewController
+        else {
+            fatalError("Invalid Configuration")
+        }
+        authViewController.delegate = self
+        
+        let navigationController = UINavigationController(rootViewController: authViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
 }
 
+//MARK: - Prepare
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ShowAuthenticationScreenSegueIdentifier {
@@ -62,6 +96,7 @@ extension SplashViewController {
     }
 }
 
+//MARK: - Fetch the principal data: token and profile info
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         dismiss(animated: true) 
