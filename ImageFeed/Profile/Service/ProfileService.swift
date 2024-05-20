@@ -29,6 +29,7 @@ final class ProfileService {
 
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
+  
         task?.cancel()
         lastToken = token
         
@@ -43,8 +44,6 @@ final class ProfileService {
                 // Successfully parsed via completion
                 completion(.success(profile))
                 
-                guard let userName = profile.username else { return }
-                profileImageService.fetchProfileImageURL(username: userName) { _ in }
                 
                 print("Profile data successfully parsed via completion \n\(profile) \n")
             case .failure(let error):

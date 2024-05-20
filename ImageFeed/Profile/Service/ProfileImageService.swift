@@ -28,6 +28,7 @@ final class ProfileImageService {
     }
     
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
+        print("SMTH")
         assert(Thread.isMainThread)
         task?.cancel()
         
