@@ -78,6 +78,7 @@ final class ProfileViewController: UIViewController {
             updateProfileDetails(profile: profile)
         }
         configUpdateAvatarForVDL()
+        view.backgroundColor = .ypBlack
     }
     
     // Profile Image
@@ -170,6 +171,3 @@ extension ProfileViewController {
     }
 }
 
-extension ProfileViewController {
-   
-}

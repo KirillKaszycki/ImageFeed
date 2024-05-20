@@ -39,7 +39,9 @@ final class SplashViewController: UIViewController {
     }
 
     private func switchToTabBarController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("Invalid Configuration")
+        }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
@@ -81,7 +83,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 profileImageService.fetchProfileImageURL(username: username) { _ in }
                 self.switchToTabBarController()
             case .failure(let error):
-                print("Parsing Data Error \(error)")
+                print("Parsing Data Error \(error.localizedDescription)")
                 alertPresenter.presentAlert(on: self, message: "Не удалось получить данные профиля - \(error)")
             }
         }
@@ -94,7 +96,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success:
                 self.switchToTabBarController()
             case .failure(let error):
-                print("[SplashViewController] [fetchProfile] Error - \(error)")
+                print("[SplashViewController] [fetchProfile] Error - \(error.localizedDescription)")
                 alertPresenter.presentAlert(on: self, message: "Не удалось войти в систему - \(error)")
             }
         }
