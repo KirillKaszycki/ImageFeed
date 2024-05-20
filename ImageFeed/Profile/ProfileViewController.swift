@@ -29,46 +29,7 @@ final class ProfileViewController: UIViewController {
     
     private var profileImageServiceObserver: NSObjectProtocol?
 
-    // I'll remove it later. Now I preservet it for potential debug
-//    override init(nibName: String?, bundle: Bundle?) {
-//         super.init(nibName: nibName, bundle: bundle)
-//         addObserver()
-//     }
-//    
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        addObserver()
-//    }
-//    
-//    deinit {
-//        removeObserver()
-//    }
-//    
-//    private func addObserver() {
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(updateAvatar(notification:)),
-//            name: ProfileImageService.didChangeNotofication,
-//            object: nil)
-//    }
-//    
-//    private func removeObserver() {
-//        NotificationCenter.default.removeObserver(
-//            self,
-//            name: ProfileImageService.didChangeNotofication,
-//            object: nil)
-//    }
-//    
-//    @objc
-//    private func updateAvatar(notification: Notification) {
-//        guard
-//            isViewLoaded,
-//            let userInfo = notification.userInfo,
-//            let profileImageURL = userInfo["URL"] as? String,
-//            let url = URL(string: profileImageURL)
-//        else { return }
-//    }
-    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImageConfigure()
@@ -81,7 +42,7 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .ypBlack
     }
     
-    // Profile Image
+    // MARK: Profile Image
     private func updateAvatar() {
         guard
             let profileImageURL = profileImageService.avatarURL,
@@ -111,7 +72,7 @@ final class ProfileViewController: UIViewController {
         imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
-    // Labels
+    // MARK: Profile Data
     private func labelsConfigure() {
         // nameLabel.text = "Екатерина Новикова"
         nameLabel.text = "Name loading..."
@@ -163,6 +124,7 @@ final class ProfileViewController: UIViewController {
     private func didTapButton() {}
 }
 
+// MARK: - Profile data update
 extension ProfileViewController {
     private func updateProfileDetails(profile: Profile) {
         self.nameLabel.text = profile.name
