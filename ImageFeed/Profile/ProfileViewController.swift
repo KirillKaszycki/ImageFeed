@@ -6,27 +6,62 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-    private var profilePhoto = UIImage()
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
+    private var profilePhoto = UIImage()
     private var nameLabel = UILabel()
     private var loginLabel = UILabel()
     private var descriptionLabel = UILabel()
-    
     private var exitButton = UIButton()
+    private let imageView: UIImageView = {
+        let avatar = UIImageView()
+        avatar.image = UIImage(named: "avatar")
+        avatar.layer.cornerRadius = 35 // As a default the picture is squared
+        avatar.translatesAutoresizingMaskIntoConstraints = false
+        avatar.clipsToBounds = true
+        return avatar
+    }()
     
-    private let imageView = UIImageView(image: .avatar)
-    
+    private var profileImageServiceObserver: NSObjectProtocol?
+
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImageConfigure()
         labelsConfigure()
         exitButtonConfigure()
+        if let profile = profileService.profile {
+            updateProfileDetails(profile: profile)
+        }
+        configUpdateAvatarForVDL()
+        view.backgroundColor = .ypBlack
     }
     
-    // Profile Image
+    // MARK: Profile Image
+    private func updateAvatar() {
+        guard
+            let profileImageURL = profileImageService.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        imageView.kf.setImage(with: url)
+    }
+    
+    private func configUpdateAvatarForVDL() {
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotofication,
+            object: nil,
+            queue: .main) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
+    }
+    
     private func profileImageConfigure() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -37,17 +72,20 @@ final class ProfileViewController: UIViewController {
         imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
-    // Labels
+    // MARK: Profile Data
     private func labelsConfigure() {
-        nameLabel.text = "Екатерина Новикова"
+        // nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = "Name loading..."
         nameLabel.textColor = .ypWhite
         nameLabel.font = .systemFont(ofSize: 23, weight: .bold)
         
-        loginLabel.text = "@ekaterina_nov"
+        // loginLabel.text = "@ekaterina_nov"
+        loginLabel.text = "@username loading..."
         loginLabel.textColor = .ypGray
         loginLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
-        descriptionLabel.text = "Hello, world!"
+        // descriptionLabel.text = "Hello, world!"
+        descriptionLabel.text = "Bio loading..."
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = .systemFont(ofSize: 13, weight: .regular)
         
@@ -85,3 +123,13 @@ final class ProfileViewController: UIViewController {
     @objc
     private func didTapButton() {}
 }
+
+// MARK: - Profile data update
+extension ProfileViewController {
+    private func updateProfileDetails(profile: Profile) {
+        self.nameLabel.text = profile.name
+        self.loginLabel.text = profile.login_name
+        self.descriptionLabel.text = profile.bio
+    }
+}
+
