@@ -23,4 +23,4 @@ struct PhotoResults: Decodable {
     let likes: Int
 }
 
-typealias PhotoResultArray = [PhotoResults]
+typealias PhotoResultList = [PhotoResults]

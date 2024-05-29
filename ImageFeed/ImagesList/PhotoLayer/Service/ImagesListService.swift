@@ -68,19 +68,26 @@ final class ImagesListService {
         let nextPage = (lastLoadedPage ?? 0) + 1
         guard let request = makePhotoRequest(page: nextPage) else { return }
         
-        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<PhotoResults, Error>) in
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<PhotoResultList, Error>) in
             guard let self = self else { return }
             
             switch result {
             case .success(let res):
-                if let photo = self.configurePhoto(from: res) {
-                    self.photos.append(photo)
-                    lastLoadedPage = nextPage
-                    NotificationCenter.default.post(
-                        name: Self.didChangeNotification,
-                        object: nil
-                    )
-                }
+//                if let photo = self.configurePhoto(from: res) {
+//                    self.photos.append(photo)
+//                    lastLoadedPage = nextPage
+//                    NotificationCenter.default.post(
+//                        name: Self.didChangeNotification,
+//                        object: nil
+//                    )
+//                }
+                
+                self.photos.append(contentsOf: res.compactMap(self.configurePhoto))
+                lastLoadedPage = nextPage
+                NotificationCenter.default.post(
+                    name: Self.didChangeNotification,
+                    object: nil
+                )
                 print("Photos successfully fetched")
             case .failure(let error):
                 print("[ImagesListSetvice][FetchPhotosNextPage] - \(error.localizedDescription)")
