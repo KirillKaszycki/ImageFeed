@@ -20,6 +20,14 @@ final class ImagesListService {
     static let shared = ImagesListService()
     private init() {}
     
+    private let dateFormatter8601 = ISO8601DateFormatter()
+    private lazy var dateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMMM yyyy"
+        formatter.locale = Locale(identifier: "ru_RU")
+        return formatter
+    }()
+    
     // MARK: Fetching the photo data
     // Making a photo request
     private func makePhotoRequest(page: Int) -> URLRequest? {
@@ -41,16 +49,10 @@ final class ImagesListService {
         guard let fullImageURL = URL(string: photo.urls.full) else { return nil }
         guard let date = photo.createdAt else { return nil }
         
-        // format the date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let dateToFormat = dateFormatter.date(from: date) else { return nil }
-        let formattedDate = dateFormatter.string(from: dateToFormat)
-        
         return Photo(
             id: photo.id,
             size: CGSize(width: photo.width, height: photo.height),
-            createdAt: formattedDate,
+            createdAt: configDate(from: date),
             welcomeDescription: photo.description,
             thumbImageURL: thumbImageURL,
             largeImageURL: fullImageURL,
@@ -58,12 +60,17 @@ final class ImagesListService {
         )
     }
     
+    private func configDate(from date: String) -> String? {
+        guard let date = dateFormatter8601.date(from: date) else { return nil }
+        return dateFormat.string(from: date)
+    }
+    
     // Fetching the photo's next page
     func fetchPhotosNextPage() {
 //        assert(Thread.isMainThread)
 //        task?.cancel()
         
-        guard task != nil else { return }
+        guard task == nil else { return }
     
         let nextPage = (lastLoadedPage ?? 0) + 1
         guard let request = makePhotoRequest(page: nextPage) else { return }
@@ -73,14 +80,6 @@ final class ImagesListService {
             
             switch result {
             case .success(let res):
-//                if let photo = self.configurePhoto(from: res) {
-//                    self.photos.append(photo)
-//                    lastLoadedPage = nextPage
-//                    NotificationCenter.default.post(
-//                        name: Self.didChangeNotification,
-//                        object: nil
-//                    )
-//                }
                 
                 self.photos.append(contentsOf: res.compactMap(self.configurePhoto))
                 lastLoadedPage = nextPage
