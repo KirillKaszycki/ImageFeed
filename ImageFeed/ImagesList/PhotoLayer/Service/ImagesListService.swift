@@ -67,8 +67,6 @@ final class ImagesListService {
     
     // Fetching the photo's next page
     func fetchPhotosNextPage() {
-//        assert(Thread.isMainThread)
-//        task?.cancel()
         
         guard task == nil else { return }
     

@@ -126,12 +126,6 @@ extension ImagesListViewController: UITableViewDelegate {
 // MARK: - Extension for ImagesListViewController methods
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-//        guard let image = UIImage(named: photosName[indexPath.row]) else {
-//            return
-//        }
-//
-//        cell.cellImage.image = image
-//        cell.dateLabel.text = dateFormatter.string(from: Date())
         
         let image = photos[indexPath.row]
         cell.cellImage.kf.setImage(
