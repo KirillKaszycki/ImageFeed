@@ -75,6 +75,7 @@ final class ImagesListViewController: UIViewController {
                 updateTableViewAnimated()
             }
     }
+    
 }
 
 // MARK: - Extension for UITableViewDataSource
@@ -91,7 +92,6 @@ extension ImagesListViewController: UITableViewDataSource {
         }
 
         configCell(for: imageListCell, with: indexPath)
-
         return imageListCell
     }
 }
@@ -128,8 +128,9 @@ extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         let image = photos[indexPath.row]
+        cell.delegate = self
         cell.cellImage.kf.setImage(
-            with: image.thumbImageURL,
+            with: image.largeImageURL,
             placeholder: UIImage(named: "placeholderImage")) { [weak self] _ in
                 guard let self = self else { return }
                 self.tableView.reloadRows(
@@ -140,8 +141,18 @@ extension ImagesListViewController {
         cell.cellImage.kf.indicatorType = .activity
         cell.dateLabel.text = image.createdAt
 
-        let isLiked = indexPath.row % 2 == 0
-        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        //let isLiked = indexPath.row % 2 == 0
+        let likeImage = image.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
+    }
+}
+
+// MARK: - Extension for ImagesListCellDelegate
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imagesListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        
+        
     }
 }

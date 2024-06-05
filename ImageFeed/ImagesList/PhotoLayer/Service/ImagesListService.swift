@@ -94,3 +94,59 @@ final class ImagesListService {
         self.task = task
     }
 }
+
+
+// MARK: - Extension for like logic
+extension ImagesListService {
+    func changeLike(photoID: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        let likeLink = ImageListConstants.likeURL + "\(photoID)/like"
+        guard let url = URL(string: likeLink) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = isLike ? "POST" : "DELETE"
+        request.setValue("Client-ID " + APIConstants.accessKey,
+                         forHTTPHeaderField: "Authorization")
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                    print("Unable to fetch the like")
+                }
+                return
+            }
+            
+            if let index = self.photos.firstIndex(where: { $0.id == photoID }) {
+                let photo = self.photos[index]
+                let newPhoto = Photo(
+                    id: photo.id,
+                    size: photo.size,
+                    createdAt: photo.createdAt,
+                    welcomeDescription: photo.welcomeDescription,
+                    thumbImageURL: photo.thumbImageURL,
+                    largeImageURL: photo.largeImageURL,
+                    isLiked: isLike
+                )
+                
+                DispatchQueue.main.async {
+                    self.photos[index] = newPhoto
+                    NotificationCenter.default.post(
+                        name: ImagesListService.didChangeNotification,
+                        object: self,
+                        userInfo: ["photos": self.photos])
+                    completion(.success(()))
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(
+                        domain: "Photo doesn't exist",
+                        code: 0)))
+                }
+            }
+        }
+        task.resume()
+    }
+}

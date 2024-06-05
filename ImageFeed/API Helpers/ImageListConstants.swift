@@ -9,4 +9,5 @@ import Foundation
 
 enum ImageListConstants {
     static let imageURLParser = "https://api.unsplash.com/photos?page="
+    static let likeURL = "https://api.unsplash.com/photos/"
 }
