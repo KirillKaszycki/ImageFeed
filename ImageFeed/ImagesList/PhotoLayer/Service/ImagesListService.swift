@@ -23,6 +23,8 @@ final class ImagesListService {
     private let dateFormatter8601 = ISO8601DateFormatter()
     private lazy var dateFormat: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
         formatter.dateFormat = "d MMMM yyyy"
         formatter.locale = Locale(identifier: "ru_RU")
         return formatter
