@@ -156,7 +156,7 @@
                                                         <constraint firstAttribute="width" constant="44" id="ldh-lZ-Nav"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="like_button_on"/>
+                                                    <state key="normal" image="like_button_off"/>
                                                     <connections>
                                                         <action selector="likeButtonClicked:" destination="pZ9-It-hcX" eventType="touchUpInside" id="cVs-7z-pHI"/>
                                                         <action selector="likeButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x0Z-gH-WkT"/>
@@ -310,7 +310,7 @@
         <image name="0" width="1600" height="1059"/>
         <image name="Backward" width="24" height="24"/>
         <image name="auth_screen_logo" width="60" height="60"/>
-        <image name="like_button_on" width="42" height="42"/>
+        <image name="like_button_off" width="42" height="42"/>
         <image name="nav_back_button" width="24" height="24"/>
         <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="31" height="30"/>
