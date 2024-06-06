@@ -12,6 +12,7 @@ final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private let profileLogOutservice = ProfileLogoutService.shared
     
     private var profilePhoto = UIImage()
     private var nameLabel = UILabel()
@@ -121,7 +122,9 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc
-    private func didTapButton() {}
+    private func didTapButton() {
+        presentLogOutAlert()
+    }
 }
 
 // MARK: - Profile data update
@@ -130,6 +133,28 @@ extension ProfileViewController {
         self.nameLabel.text = profile.name
         self.loginLabel.text = profile.login_name
         self.descriptionLabel.text = profile.bio
+    }
+}
+
+// MARK: - Logout logics
+extension ProfileViewController {
+    private func presentLogOutAlert() {
+        let alertController = UIAlertController(
+            title: "Пока пока!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert
+        )
+        
+        let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
+            self.profileLogOutservice.logout()
+        }
+        let actionNo = UIAlertAction(title: "Нет", style: .cancel)
+        
+        alertController.addAction(actionYes)
+        alertController.addAction(actionNo)
+        alertController.preferredAction = actionNo
+        
+        present(alertController, animated: true)
     }
 }
 
