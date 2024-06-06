@@ -91,6 +91,7 @@ extension ImagesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        imageListCell.delegate = self
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
@@ -128,7 +129,7 @@ extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         let image = photos[indexPath.row]
-        cell.delegate = self
+        // cell.delegate = self
         cell.cellImage.kf.setImage(
             with: image.largeImageURL,
             placeholder: UIImage(named: "placeholderImage")) { [weak self] _ in
