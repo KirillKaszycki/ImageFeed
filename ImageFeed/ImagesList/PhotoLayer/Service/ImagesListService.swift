@@ -55,7 +55,7 @@ final class ImagesListService {
             createdAt: configDate(from: date),
             welcomeDescription: photo.description,
             thumbImageURL: thumbImageURL,
-            largeImageURL: fullImageURL,
+            fullImageURL: fullImageURL,
             isLiked: photo.likedByUser
         )
     }
@@ -121,7 +121,7 @@ extension ImagesListService {
                         createdAt: image.createdAt,
                         welcomeDescription: image.welcomeDescription,
                         thumbImageURL: image.thumbImageURL,
-                        largeImageURL: image.largeImageURL,
+                        fullImageURL: image.fullImageURL,
                         isLiked: !image.isLiked
                     )
                     self.photos[index] = newImage

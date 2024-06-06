@@ -44,8 +44,8 @@ final class ImagesListViewController: UIViewController {
                 return
             }
             
-            let image = UIImage(named: photosName[indexPath.row])
-            viewController.image = image
+            let image = photos[indexPath.row].fullImageURL
+            viewController.fullImageURL = image
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -110,9 +110,6 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        guard let image = UIImage(named: photosName[indexPath.row]) else {
-//            return 0
-//        }
         let image = photos[indexPath.row]
         
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
@@ -129,9 +126,8 @@ extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         let image = photos[indexPath.row]
-        // cell.delegate = self
         cell.cellImage.kf.setImage(
-            with: image.largeImageURL,
+            with: image.fullImageURL,
             placeholder: UIImage(named: "placeholderImage")) { [weak self] _ in
                 guard let self = self else { return }
                 self.tableView.reloadRows(
@@ -141,10 +137,6 @@ extension ImagesListViewController {
         
         cell.cellImage.kf.indicatorType = .activity
         cell.dateLabel.text = image.createdAt
-
-        //let isLiked = indexPath.row % 2 == 0
-//        let likeImage = image.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-//        cell.likeButton.setImage(likeImage, for: .normal)
     }
 }
 
@@ -163,10 +155,11 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 self.photos = self.imagesListService.photos
                 cell.visualizeTheLike(isLiked: self.photos[indexPath.row].isLiked)
                 print("[ImagesListViewController][imagesListCellDidTapLike] - Like successfully changed")
+                UIBlockingProgressHUD.dismiss()
             case .failure(let error):
                 print("[ImagesListViewController][imagesListCellDidTapLike] - \(error.localizedDescription)")
+                UIBlockingProgressHUD.dismiss()
             }
-            UIBlockingProgressHUD.dismiss()
         }
     }
 }
