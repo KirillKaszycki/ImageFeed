@@ -165,6 +165,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
             case .failure(let error):
                 print("[ImagesListViewController][imagesListCellDidTapLike] - \(error.localizedDescription)")
             }
+            UIBlockingProgressHUD.dismiss()
         }
     }
 }
