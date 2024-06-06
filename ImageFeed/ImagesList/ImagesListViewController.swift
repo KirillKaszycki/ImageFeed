@@ -142,8 +142,8 @@ extension ImagesListViewController {
         cell.dateLabel.text = image.createdAt
 
         //let isLiked = indexPath.row % 2 == 0
-        let likeImage = image.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-        cell.likeButton.setImage(likeImage, for: .normal)
+//        let likeImage = image.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+//        cell.likeButton.setImage(likeImage, for: .normal)
     }
 }
 
@@ -153,6 +153,18 @@ extension ImagesListViewController: ImagesListCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
         
-        
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoID: photo.id, isLike: photo.isLiked) { [weak self] res in
+            guard let self = self else { return }
+            
+            switch res {
+            case .success:
+                self.photos = self.imagesListService.photos
+                cell.visualizeTheLike(isLiked: self.photos[indexPath.row].isLiked)
+                print("[ImagesListViewController][imagesListCellDidTapLike] - Like successfully changed")
+            case .failure(let error):
+                print("[ImagesListViewController][imagesListCellDidTapLike] - \(error.localizedDescription)")
+            }
+        }
     }
 }

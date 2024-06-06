@@ -85,7 +85,7 @@ final class ImagesListService {
                     name: Self.didChangeNotification,
                     object: nil
                 )
-                print("Photos successfully fetched")
+                print("[ImagesListSetvice][FetchPhotosNextPage] - Photos successfully fetched")
             case .failure(let error):
                 print("[ImagesListSetvice][FetchPhotosNextPage] - \(error.localizedDescription)")
             }
@@ -98,55 +98,40 @@ final class ImagesListService {
 
 // MARK: - Extension for like logic
 extension ImagesListService {
-    func changeLike(photoID: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
-        let likeLink = ImageListConstants.likeURL + "\(photoID)/like"
-        guard let url = URL(string: likeLink) else { return }
+    func changeLike(photoID: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
+        guard let url = URL(string: "\(ImageListConstants.imageURLParser)\(photoID)/like") else { return }
         
+        // DELETE/POST request logics
         var request = URLRequest(url: url)
-        request.httpMethod = isLike ? "POST" : "DELETE"
-        request.setValue("Client-ID " + APIConstants.accessKey,
-                         forHTTPHeaderField: "Authorization")
+        guard let token = token.token else { return }
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = isLike ? "DELETE" : "POST"
         
-        
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+        // This variable is never used so it's named _
+        _ = URLSession.shared.objectTaskData(for: request) { [weak self] result in
             guard let self = self else { return }
             
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                    print("Unable to fetch the like")
+            switch result {
+            case .success:
+                if let index = self.photos.firstIndex(where: { $0.id == photoID }) {
+                    let image = self.photos[index]
+                    let newImage = Photo(
+                        id: image.id,
+                        size: image.size,
+                        createdAt: image.createdAt,
+                        welcomeDescription: image.welcomeDescription,
+                        thumbImageURL: image.thumbImageURL,
+                        largeImageURL: image.largeImageURL,
+                        isLiked: !image.isLiked
+                    )
+                    self.photos[index] = newImage
+                    completion(.success(newImage))
                 }
-                return
-            }
-            
-            if let index = self.photos.firstIndex(where: { $0.id == photoID }) {
-                let photo = self.photos[index]
-                let newPhoto = Photo(
-                    id: photo.id,
-                    size: photo.size,
-                    createdAt: photo.createdAt,
-                    welcomeDescription: photo.welcomeDescription,
-                    thumbImageURL: photo.thumbImageURL,
-                    largeImageURL: photo.largeImageURL,
-                    isLiked: isLike
-                )
-                
-                DispatchQueue.main.async {
-                    self.photos[index] = newPhoto
-                    NotificationCenter.default.post(
-                        name: ImagesListService.didChangeNotification,
-                        object: self,
-                        userInfo: ["photos": self.photos])
-                    completion(.success(()))
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion(.failure(NSError(
-                        domain: "Photo doesn't exist",
-                        code: 0)))
-                }
+                print("[ImagesListService][ChangeLike] - Like successfully edited")
+            case .failure(let error):
+                completion(.failure(error))
+                print("[ImagesListService][ChangeLike] - \(error.localizedDescription)")
             }
         }
-        task.resume()
     }
 }
