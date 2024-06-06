@@ -223,14 +223,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="mC2-Di-bFm">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="mC2-Di-bFm">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZBo-oy-VFV">
-                                        <rect key="frame" x="0.0" y="0.0" width="410" height="852"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZBo-oy-VFV">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="852" id="bfF-cU-sUa"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZBo-oy-VFV" firstAttribute="leading" secondItem="G4B-u4-C7b" secondAttribute="leading" id="9pZ-p4-02s"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZBo-oy-VFV" secondAttribute="bottom" id="ISc-m2-l0O"/>
+                                    <constraint firstItem="ZBo-oy-VFV" firstAttribute="centerX" secondItem="mC2-Di-bFm" secondAttribute="centerX" id="VqB-1e-PhZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZBo-oy-VFV" secondAttribute="trailing" id="YNY-s8-WiP"/>
+                                    <constraint firstItem="G4B-u4-C7b" firstAttribute="bottom" secondItem="ZBo-oy-VFV" secondAttribute="bottom" id="q7Y-AT-F2B"/>
+                                    <constraint firstItem="ZBo-oy-VFV" firstAttribute="top" secondItem="GaN-LG-s46" secondAttribute="top" id="tfF-M8-cqa"/>
+                                </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="GaN-LG-s46"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="G4B-u4-C7b"/>
                                 <connections>
