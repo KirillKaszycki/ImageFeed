@@ -99,7 +99,7 @@ final class ImagesListService {
 // MARK: - Extension for like logic
 extension ImagesListService {
     func changeLike(photoID: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
-        guard let url = URL(string: "\(ImageListConstants.imageURLParser)\(photoID)/like") else { return }
+        guard let url = URL(string: "\(ImageListConstants.likeURL)\(photoID)/like") else { return }
         
         // DELETE/POST request logics
         var request = URLRequest(url: url)
