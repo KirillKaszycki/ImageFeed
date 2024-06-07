@@ -49,7 +49,9 @@ final class ImagesListService {
     private func configurePhoto(from photo: PhotoResults) -> Photo? {
         guard let thumbImageURL = URL(string: photo.urls.thumb) else { return nil }
         guard let fullImageURL = URL(string: photo.urls.full) else { return nil }
-        guard let date = photo.createdAt else { return nil }
+        // guard let date = photo.createdAt else { return nil }
+        
+        let date = photo.createdAt ?? ""
         
         return Photo(
             id: photo.id,
