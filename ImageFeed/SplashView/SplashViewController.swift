@@ -119,7 +119,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.switchToTabBarController()
             case .failure(let error):
                 print("Parsing Data Error \(error.localizedDescription)")
-                alertPresenter.presentAlert(on: self, message: "Не удалось получить данные профиля - \(error)")
+                alertPresenter.presentAlert(on: self, message: "Не удалось получить данные профиля")
             }
         }
     }
@@ -132,7 +132,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.switchToTabBarController()
             case .failure(let error):
                 print("[SplashViewController] [fetchProfile] Error - \(error.localizedDescription)")
-                alertPresenter.presentAlert(on: self, message: "Не удалось войти в систему - \(error)")
+                alertPresenter.presentAlert(on: self, message: "Не удалось войти в систему")
             }
         }
     }
