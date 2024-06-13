@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E314BD662BDCDDDE00543C78 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314BD652BDCDDDE00543C78 /* APIConstants.swift */; };
+		E314BD662BDCDDDE00543C78 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314BD652BDCDDDE00543C78 /* AuthConfiguration.swift */; };
 		E3197AD72BC8057A007ECCB5 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3197AD62BC8057A007ECCB5 /* SingleImageViewController.swift */; };
 		E34FB32A2BEDF67B008670A6 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = E34FB3292BEDF67B008670A6 /* ProgressHUD */; };
 		E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */; };
@@ -42,6 +42,7 @@
 		E3D84A932C1B1D18008D8258 /* WebViewViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A922C1B1D18008D8258 /* WebViewViewControllerProtocol.swift */; };
 		E3D84A962C1B1D70008D8258 /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A952C1B1D70008D8258 /* WebViewPresenterProtocol.swift */; };
 		E3D84A982C1B1DD0008D8258 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A972C1B1DD0008D8258 /* WebViewPresenter.swift */; };
+		E3D84A9A2C1B53C5008D8258 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A992C1B53C5008D8258 /* AuthHelper.swift */; };
 		E3F272F32BDE16BD000A0523 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F272F22BDE16BD000A0523 /* AuthViewController.swift */; };
 		E3F272F52BDE1CEB000A0523 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F272F42BDE1CEB000A0523 /* WebViewViewController.swift */; };
 		E3F412842BFA53D200881DCB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E3F412832BFA53D200881DCB /* Kingfisher */; };
@@ -70,7 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E314BD652BDCDDDE00543C78 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		E314BD652BDCDDDE00543C78 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		E3197AD62BC8057A007ECCB5 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		E35E3CDD2BB8579A00C9FA5E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		E365348F2BE0D444009815BF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		E3D84A922C1B1D18008D8258 /* WebViewViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerProtocol.swift; sourceTree = "<group>"; };
 		E3D84A952C1B1D70008D8258 /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		E3D84A972C1B1DD0008D8258 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		E3D84A992C1B53C5008D8258 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		E3F272F22BDE16BD000A0523 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E3F272F42BDE1CEB000A0523 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		E3F9C70F2C03087700BF469A /* ImageListConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListConstants.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		E36CCBE82BDF68B20069DEDC /* WebView */ = {
 			isa = PBXGroup;
 			children = (
+				E3D84A9B2C1B54F4008D8258 /* Helper */,
 				E3D84A942C1B1D4A008D8258 /* Controller */,
 				E3D84A912C1B1CF2008D8258 /* Presenter */,
 			);
@@ -227,7 +230,7 @@
 		E37D91342BFA3FA00069F213 /* API Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E314BD652BDCDDDE00543C78 /* APIConstants.swift */,
+				E314BD652BDCDDDE00543C78 /* AuthConfiguration.swift */,
 				E37D91372BFA3FD50069F213 /* ProfileConstants.swift */,
 				E3F9C70F2C03087700BF469A /* ImageListConstants.swift */,
 				E37D91352BFA3FB90069F213 /* WebViewConstatnts.swift */,
@@ -371,6 +374,14 @@
 				E3D84A922C1B1D18008D8258 /* WebViewViewControllerProtocol.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		E3D84A9B2C1B54F4008D8258 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E3D84A992C1B53C5008D8258 /* AuthHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		E3DF2CE02BC7CA5D0078952A /* Profile */ = {
@@ -547,6 +558,7 @@
 				E3D84A932C1B1D18008D8258 /* WebViewViewControllerProtocol.swift in Sources */,
 				E37D913D2BFA4ADC0069F213 /* AuthViewControllerDelegate.swift in Sources */,
 				E36534902BE0D444009815BF /* SplashViewController.swift in Sources */,
+				E3D84A9A2C1B53C5008D8258 /* AuthHelper.swift in Sources */,
 				E3FA97852BF48ECD0070B243 /* Profile.swift in Sources */,
 				E35E3CDE2BB8579A00C9FA5E /* ImagesListCell.swift in Sources */,
 				E3FA97832BF47CE60070B243 /* ProfileResult.swift in Sources */,
@@ -558,7 +570,7 @@
 				E37D913B2BFA44900069F213 /* AlertPresenter.swift in Sources */,
 				E3A74C7B2BF6F1BC00699185 /* ProfileImage.swift in Sources */,
 				E3B07E152BFB6560001C9317 /* TabBarController.swift in Sources */,
-				E314BD662BDCDDDE00543C78 /* APIConstants.swift in Sources */,
+				E314BD662BDCDDDE00543C78 /* AuthConfiguration.swift in Sources */,
 				E387CEF02C009F500069287C /* PhotoResults.swift in Sources */,
 				E3197AD72BC8057A007ECCB5 /* SingleImageViewController.swift in Sources */,
 				E387CEEE2C008A580069287C /* ImagesListService.swift in Sources */,

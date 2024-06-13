@@ -14,6 +14,7 @@ final class AuthViewController: UIViewController {
     weak var delegate: AuthViewControllerDelegate?
     private let showWebViewSegueIdentifier = "ShowWebView"
     private let apertPresenter = AlertPresenter()
+    var authHelper = AuthHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ final class AuthViewController: UIViewController {
             else {
                 fatalError("Failed to prepare for \(showWebViewSegueIdentifier)")
             }
-            let webWiewPresenter = WebViewPresenter()
+            let webWiewPresenter = WebViewPresenter(authHelper: authHelper)
             webViewViewController.presenter = webWiewPresenter
             webWiewPresenter.view = webViewViewController
             webViewViewController.delegate = self
