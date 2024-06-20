@@ -8,7 +8,9 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    var presenter: (any ProfileViewPeresenterProtocol)?
+    
     
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
@@ -33,36 +35,25 @@ final class ProfileViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .ypBlack
         profileImageConfigure()
         labelsConfigure()
         exitButtonConfigure()
-        if let profile = profileService.profile {
-            updateProfileDetails(profile: profile)
-        }
-        configUpdateAvatarForVDL()
-        view.backgroundColor = .ypBlack
+        presenter = ProfileViewPresenter(view: self)
+        presenter?.viewDidLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter?.profileImageServiceRemoveObserver()
     }
     
     // MARK: Profile Image
-    private func updateAvatar() {
-        guard
-            let profileImageURL = profileImageService.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
+    func updateAvatar(url: URL) {
         imageView.kf.setImage(with: url)
     }
     
-    private func configUpdateAvatarForVDL() {
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotofication,
-            object: nil,
-            queue: .main) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
-        updateAvatar()
-    }
-    
+    // MARK: Profile Image configure
     private func profileImageConfigure() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -121,15 +112,12 @@ final class ProfileViewController: UIViewController {
         button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
     }
     
-    @objc
-    private func didTapButton() {
-        presentLogOutAlert()
-    }
+
 }
 
 // MARK: - Profile data update
 extension ProfileViewController {
-    private func updateProfileDetails(profile: Profile) {
+    internal func updateProfileDetails(profile: Profile) {
         self.nameLabel.text = profile.name
         self.loginLabel.text = profile.login_name
         self.descriptionLabel.text = profile.bio
@@ -138,6 +126,11 @@ extension ProfileViewController {
 
 // MARK: - Logout logics
 extension ProfileViewController {
+    @objc
+    private func didTapButton() {
+        presentLogOutAlert()
+    }
+    
     private func presentLogOutAlert() {
         let alertController = UIAlertController(
             title: "Пока пока!",
@@ -146,7 +139,7 @@ extension ProfileViewController {
         )
         
         let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
-            self.profileLogOutservice.logout()
+            self.presenter?.logout()
         }
         let actionNo = UIAlertAction(title: "Нет", style: .cancel)
         
