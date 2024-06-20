@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController, ImagesListViewControllerProtocol {
 
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
 
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
 
@@ -24,14 +24,15 @@ final class ImagesListViewController: UIViewController {
     private var photos: [Photo] = []
     let imagesListService = ImagesListService.shared
     var imagesListServiceObserver: NSObjectProtocol?
+    
+    var presenter: ImagesListViewPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        imageServiceObserverConfig()
-        imagesListService.fetchPhotosNextPage()
+        presenter = ImagesListViewPresenter(view: self)
+        presenter?.viewDidLoad(tableView: tableView)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,30 +52,33 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
-    func updateTableViewAnimated() {
-        let oldCount = photos.count
-        let newCount = imagesListService.photos.count
-        
-        photos = imagesListService.photos
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                let indexPaths = (oldCount..<newCount).map { i in
-                    IndexPath(row: i, section: 0)
-                }
-                tableView.insertRows(at: indexPaths, with: .automatic)
-            } completion: { _ in }
-        }
-    }
+//    //MVP
+//    func updateTableViewAnimated() {
+//        let oldCount = photos.count
+//        let newCount = imagesListService.photos.count
+//        
+//        photos = imagesListService.photos
+//        if oldCount != newCount {
+//            tableView.performBatchUpdates {
+//                let indexPaths = (oldCount..<newCount).map { i in
+//                    IndexPath(row: i, section: 0)
+//                }
+//                tableView.insertRows(at: indexPaths, with: .automatic)
+//            } completion: { _ in }
+//        }
+//    }
     
-    private func imageServiceObserverConfig() {
-        imagesListServiceObserver = NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: .main) { [weak self] _ in
-                guard let self = self else { return }
-                updateTableViewAnimated()
-            }
-    }
+    
+//    //MVP
+//    private func imageServiceObserverConfig() {
+//        imagesListServiceObserver = NotificationCenter.default.addObserver(
+//            forName: ImagesListService.didChangeNotification,
+//            object: nil,
+//            queue: .main) { [weak self] _ in
+//                guard let self = self else { return }
+//                updateTableViewAnimated()
+//            }
+//    }
     
 }
 
