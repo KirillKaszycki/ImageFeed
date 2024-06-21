@@ -5,12 +5,12 @@
 //  Created by Кирилл Кашицкий on 20.06.2024.
 //
 
-import UIKit
+import Foundation
 
 final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
     weak var view: ImagesListViewControllerProtocol?
     
-    private(set) var photos: [Photo] = []
+    var photos: [Photo] = []
     private let imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
     
@@ -18,35 +18,26 @@ final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
         self.view = view
     }
     
-    func viewDidLoad(tableView: UITableView) {
+    func viewDidLoad() {
         imagesListService.fetchPhotosNextPage()
-        imageServiceObserverConfig(tableView: tableView)
+        imageServiceObserverConfig()
     }
     
-    func updateTableViewAnimated(tableView: UITableView) {
+    func updateTableViewAnimated() {
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         
         photos = imagesListService.photos
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                let indexPaths = (oldCount..<newCount).map { i in
-                    IndexPath(row: i, section: 0)
-                }
-                tableView.insertRows(at: indexPaths, with: .automatic)
-            } completion: { _ in }
-        }
+        view?.updateTableViewAnimated(oldCount: oldCount, newCount: newCount)
     }
     
-    func imageServiceObserverConfig(tableView: UITableView) {
+    func imageServiceObserverConfig() {
         imagesListServiceObserver = NotificationCenter.default.addObserver(
             forName: ImagesListService.didChangeNotification,
             object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            updateTableViewAnimated(tableView: tableView)
-        }
+            queue: .main) { [weak self] _ in
+                self?.updateTableViewAnimated()
+            }
     }
     
     func removeObserver() {

@@ -9,4 +9,5 @@ import Foundation
 
 protocol ImagesListViewControllerProtocol: AnyObject {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath)
+    func updateTableViewAnimated(oldCount: Int, newCount: Int)
 }

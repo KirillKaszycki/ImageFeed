@@ -10,8 +10,8 @@ import UIKit
 protocol ImagesListViewPresenterProtocol: AnyObject {
     var view: ImagesListViewControllerProtocol? { get set }
     
-    func viewDidLoad(tableView: UITableView)
-    func updateTableViewAnimated(tableView: UITableView)
-    func imageServiceObserverConfig(tableView: UITableView)
+    func viewDidLoad()
+    func updateTableViewAnimated()
+    func imageServiceObserverConfig()
     func removeObserver()
 }
