@@ -23,7 +23,7 @@ final class ImageFeedUITests: XCTestCase {
         XCTAssertTrue(webView.waitForExistence(timeout: 5))
 
         let loginTextField = webView.descendants(matching: .textField).element
-        XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
+        XCTAssertTrue(loginTextField.waitForExistence(timeout: 10))
         
         loginTextField.tap()
         loginTextField.typeText("kashitskii.kirill@gmail.com")

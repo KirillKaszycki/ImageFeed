@@ -21,7 +21,6 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
     }()
     
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
-    //private var photos: [Photo] = []
     let imagesListService = ImagesListService.shared
     var imagesListServiceObserver: NSObjectProtocol?
     
@@ -59,35 +58,6 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
             tableView.insertRows(at: indexPaths, with: .automatic)
         }
     }
-    
-//    //MVP
-//    func updateTableViewAnimated() {
-//        let oldCount = photos.count
-//        let newCount = imagesListService.photos.count
-//        
-//        photos = imagesListService.photos
-//        if oldCount != newCount {
-//            tableView.performBatchUpdates {
-//                let indexPaths = (oldCount..<newCount).map { i in
-//                    IndexPath(row: i, section: 0)
-//                }
-//                tableView.insertRows(at: indexPaths, with: .automatic)
-//            } completion: { _ in }
-//        }
-//    }
-    
-    
-//    //MVP
-//    private func imageServiceObserverConfig() {
-//        imagesListServiceObserver = NotificationCenter.default.addObserver(
-//            forName: ImagesListService.didChangeNotification,
-//            object: nil,
-//            queue: .main) { [weak self] _ in
-//                guard let self = self else { return }
-//                updateTableViewAnimated()
-//            }
-//    }
-    
 }
 
 // MARK: - Extension for UITableViewDataSource
