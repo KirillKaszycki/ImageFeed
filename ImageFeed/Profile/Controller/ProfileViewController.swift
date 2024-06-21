@@ -110,6 +110,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         
         button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        button.accessibilityIdentifier = "logout button"
     }
     
 

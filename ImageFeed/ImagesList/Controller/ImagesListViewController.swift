@@ -136,7 +136,7 @@ extension ImagesListViewController: UITableViewDelegate {
 // MARK: - Extension for ImagesListViewController methods
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        
+        cell.likeButton.accessibilityIdentifier = "LikeButton"
         guard let image = presenter?.photos[indexPath.row] else { return }
         cell.cellImage.kf.setImage(
             with: image.fullImageURL,

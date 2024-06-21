@@ -27,14 +27,14 @@ final class ImageFeedUITests: XCTestCase {
         
         loginTextField.tap()
         loginTextField.typeText("kashitskii.kirill@gmail.com")
-        webView.swipeUp()
+        XCUIApplication().toolbars.buttons["Done"].tap()
         
         let passwordTextField = webView.descendants(matching: .secureTextField).element
         XCTAssertTrue(passwordTextField.waitForExistence(timeout: 5))
         
         passwordTextField.tap()
         passwordTextField.typeText("12345678")
-        webView.swipeUp()
+        XCUIApplication().toolbars.buttons["Done"].tap()
         
         webView.buttons["Login"].tap()
         
@@ -50,7 +50,7 @@ final class ImageFeedUITests: XCTestCase {
         tablesQuery.element.swipeUp()
         
         let cellLike = tablesQuery.cells.firstMatch
-        let likeButton = cellLike.buttons["Like Button"]
+        let likeButton = cellLike.buttons["LikeButton"]
         likeButton.tap()
         sleep(2)
         likeButton.tap()
@@ -78,7 +78,7 @@ final class ImageFeedUITests: XCTestCase {
         sleep(3)
         app.buttons["logout button"].tap()
         sleep(3)
-        let logoutAlert = app.alerts["Пока, пока!"]
+        let logoutAlert = app.alerts["Пока пока!"]
         XCTAssertTrue(logoutAlert.exists, "Logout alert does not exist")
         logoutAlert.buttons["Да"].tap()
         XCTAssertTrue(app.buttons["Authenticate"].waitForExistence(timeout: 3))
