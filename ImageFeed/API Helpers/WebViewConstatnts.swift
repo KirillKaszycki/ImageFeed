@@ -9,6 +9,5 @@ import Foundation
 
 // WebView Constants
 enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     static let unsplashTokenRequestString = "https://unsplash.com/oauth/token"
 }

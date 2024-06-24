@@ -11,4 +11,5 @@ import Foundation
 enum ProfileConstants {
     static let ProfileRequest = "https://api.unsplash.com/me"
     static let ProfileImageRequest = "https://api.unsplash.com/users/"
+    static let profileURL = "https://api.unsplash.com/users/"
 }
